@@ -24,7 +24,7 @@ export const DashboardLayout: React.FC = () => {
                 <Sidebar
                     isCollapsed={isSidebarCollapsed}
                     onToggle={toggleSidebar}
-                    onMobileClose={isMobileSidebarOpen ? () => setIsMobileSidebarOpen(false) : undefined}
+                    onMobileClose={() => setIsMobileSidebarOpen(false)}
                 />
             </div>
 

@@ -182,6 +182,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, onMobil
                                                             <Link
                                                                 to={child.path}
                                                                 onClick={() => {
+                                                                    console.log('Submenu clicked, calling onMobileClose');
                                                                     // Close mobile sidebar when clicking a submenu item
                                                                     onMobileClose?.();
                                                                 }}
