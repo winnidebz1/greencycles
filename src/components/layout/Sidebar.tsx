@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
     LayoutDashboard,
@@ -94,6 +94,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, onMobil
     const { user, logout } = useAuthStore();
     const { settings } = useSettings();
     const [expandedMenus, setExpandedMenus] = useState<string[]>([]);
+
+    // Close mobile sidebar when route changes
+    useEffect(() => {
+        if (onMobileClose) {
+            onMobileClose();
+        }
+    }, [location.pathname, onMobileClose]);
 
     const handleLogout = () => {
         logout();
