@@ -21,7 +21,12 @@ export const DashboardLayout: React.FC = () => {
             {isMobileSidebarOpen && (
                 <div
                     className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
-                    onClick={toggleMobileSidebar}
+                    onClick={(e) => {
+                        // Only close if clicking the overlay itself, not its children
+                        if (e.target === e.currentTarget) {
+                            toggleMobileSidebar();
+                        }
+                    }}
                 />
             )}
 
