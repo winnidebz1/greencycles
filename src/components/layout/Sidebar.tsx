@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
     LayoutDashboard,
@@ -86,27 +86,13 @@ const menuItems: MenuItem[] = [
 interface SidebarProps {
     isCollapsed: boolean;
     onToggle: () => void;
-    onMobileClose?: () => void;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, onMobileClose }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) => {
     const location = useLocation();
     const { user, logout } = useAuthStore();
     const { settings } = useSettings();
     const [expandedMenus, setExpandedMenus] = useState<string[]>([]);
-
-    // Close mobile sidebar when route changes
-    useEffect(() => {
-        console.log('Route changed to:', location.pathname);
-        console.log('onMobileClose exists:', !!onMobileClose);
-        console.log('Window width:', window.innerWidth);
-
-        // Only close on mobile (width < 1024px)
-        if (onMobileClose && window.innerWidth < 1024) {
-            console.log('Calling onMobileClose');
-            onMobileClose();
-        }
-    }, [location.pathname]);
 
     const handleLogout = () => {
         logout();
@@ -194,11 +180,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, onMobil
                                                         <li key={child.path}>
                                                             <Link
                                                                 to={child.path}
-                                                                onClick={() => {
-                                                                    console.log('Submenu clicked, calling onMobileClose');
-                                                                    // Close mobile sidebar when clicking a submenu item
-                                                                    onMobileClose?.();
-                                                                }}
                                                                 className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-200 ${isActive(child.path)
                                                                     ? 'text-white bg-slate-800 font-semibold'
                                                                     : 'text-slate-500 hover:text-white hover:bg-slate-800/50'
@@ -215,10 +196,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, onMobil
                                     ) : (
                                         <Link
                                             to={item.path}
-                                            onClick={() => {
-                                                // Close mobile sidebar when clicking a menu item
-                                                onMobileClose?.();
-                                            }}
                                             className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 group ${active
                                                 ? 'bg-primary-600 text-white shadow-lg shadow-primary-900/50'
                                                 : 'text-slate-400 hover:text-white hover:bg-slate-800'
