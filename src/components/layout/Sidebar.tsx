@@ -57,7 +57,6 @@ const menuItems: MenuItem[] = [
         title: 'HRM',
         icon: <Briefcase className="w-5 h-5" />,
         path: '/hrm',
-        roles: ['super_admin', 'admin'],
         children: [
             { title: 'Employees', icon: <UserCircle className="w-4 h-4" />, path: '/hrm/employees' },
             { title: 'Attendance', icon: <Calendar className="w-4 h-4" />, path: '/hrm/attendance' },
