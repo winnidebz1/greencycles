@@ -20,6 +20,7 @@ import {
     FileUp,
     ChevronLeft,
     ChevronRight,
+    LogOut,
 } from 'lucide-react';
 import { useAuthStore } from '@/store/authStore';
 import { useSettings } from '@/contexts/SettingsContext';
@@ -90,9 +91,14 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) => {
     const location = useLocation();
-    const { user } = useAuthStore();
+    const { user, logout } = useAuthStore();
     const { settings } = useSettings();
     const [expandedMenus, setExpandedMenus] = useState<string[]>([]);
+
+    const handleLogout = () => {
+        logout();
+        window.location.href = '/login';
+    };
 
     const toggleMenu = (path: string) => {
         setExpandedMenus((prev) =>
@@ -202,6 +208,15 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) => {
                                 </li>
                             );
                         })}
+                        <li className="mt-auto pt-4 border-t border-slate-800">
+                            <button
+                                onClick={handleLogout}
+                                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 group text-slate-400 hover:text-red-400 hover:bg-slate-800"
+                            >
+                                <LogOut className="w-5 h-5 group-hover:text-red-400" />
+                                {!isCollapsed && <span className="font-medium">Logout</span>}
+                            </button>
+                        </li>
                     </ul>
                 </nav>
 
