@@ -30,30 +30,30 @@ interface StatCardProps {
 const StatCard: React.FC<StatCardProps> = ({ title, value, icon, trend, color }) => {
     return (
         <Card className="hover:shadow-medium transition-shadow duration-200">
-            <CardBody>
-                <div className="flex items-center justify-between">
-                    <div className="flex-1">
-                        <p className="text-sm font-medium text-gray-600 mb-1">{title}</p>
-                        <h3 className="text-2xl font-bold text-gray-900">{value}</h3>
+            <CardBody className="p-3 sm:p-6">
+                <div className="flex items-start justify-between">
+                    <div className="flex-1 min-w-0">
+                        <p className="text-xs sm:text-sm font-medium text-gray-600 mb-0.5 sm:mb-1 truncate">{title}</p>
+                        <h3 className="text-lg sm:text-2xl font-bold text-gray-900 truncate">{value}</h3>
                         {trend && (
-                            <div className="flex items-center gap-1 mt-2">
+                            <div className="flex items-center gap-1 mt-1 sm:mt-2">
                                 {trend.isPositive ? (
                                     <ArrowUp className="w-3 h-3 text-success-600" />
                                 ) : (
                                     <ArrowDown className="w-3 h-3 text-danger-600" />
                                 )}
                                 <span
-                                    className={`text-xs font-medium ${trend.isPositive ? 'text-success-600' : 'text-danger-600'
+                                    className={`text-[10px] sm:text-xs font-medium ${trend.isPositive ? 'text-success-600' : 'text-danger-600'
                                         }`}
                                 >
                                     {trend.value}%
                                 </span>
-                                <span className="text-xs text-gray-500">vs last month</span>
+                                <span className="text-[10px] sm:text-xs text-gray-500 hidden sm:inline">vs last month</span>
                             </div>
                         )}
                     </div>
-                    <div className={`w-10 h-10 rounded-lg ${color} flex items-center justify-center shrink-0 ml-4`}>
-                        {icon}
+                    <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg ${color} flex items-center justify-center shrink-0 ml-2 sm:ml-4`}>
+                        {React.cloneElement(icon as React.ReactElement, { className: 'w-4 h-4 sm:w-5 sm:h-5' })}
                     </div>
                 </div>
             </CardBody>
@@ -105,78 +105,78 @@ export const DashboardPage: React.FC = () => {
     return (
         <div className="space-y-6 animate-fade-in">
             {/* Welcome Section */}
-            <div className="bg-gradient-to-r from-primary-600 to-secondary-600 rounded-xl p-8 text-white">
-                <h1 className="text-3xl font-bold mb-2">
+            <div className="bg-gradient-to-r from-primary-600 to-secondary-600 rounded-xl p-4 sm:p-8 text-white">
+                <h1 className="text-xl sm:text-3xl font-bold mb-1 sm:mb-2">
                     Welcome back, {user?.firstName}! 👋
                 </h1>
-                <p className="text-primary-100">
+                <p className="text-sm sm:text-base text-primary-100">
                     Here's what's happening with your business today.
                 </p>
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
                 <StatCard
                     title="Total Clients"
                     value={stats?.totalClients || 0}
-                    icon={<Users className="w-5 h-5 text-primary-600" />}
+                    icon={<Users />}
                     trend={{ value: 12, isPositive: true }}
-                    color="bg-primary-100"
+                    color="bg-primary-100 text-primary-600"
                 />
                 <StatCard
                     title="Active Projects"
                     value={stats?.activeProjects || 0}
-                    icon={<FolderKanban className="w-5 h-5 text-secondary-600" />}
+                    icon={<FolderKanban />}
                     trend={{ value: 8, isPositive: true }}
-                    color="bg-secondary-100"
+                    color="bg-secondary-100 text-secondary-600"
                 />
                 <StatCard
                     title="Pending Invoices"
                     value={stats?.pendingInvoices || 0}
-                    icon={<Receipt className="w-5 h-5 text-warning-600" />}
+                    icon={<Receipt />}
                     trend={{ value: 5, isPositive: false }}
-                    color="bg-warning-100"
+                    color="bg-warning-100 text-warning-600"
                 />
                 <StatCard
                     title="New Leads"
                     value={stats?.newLeads || 0}
-                    icon={<UserPlus className="w-5 h-5 text-success-600" />}
+                    icon={<UserPlus />}
                     trend={{ value: 15, isPositive: true }}
-                    color="bg-success-100"
+                    color="bg-success-100 text-success-600"
                 />
             </div>
 
             {/* Revenue & HR Stats */}
             {user?.role !== 'client' && (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
                     <StatCard
                         title="Total Revenue"
                         value={`${currencySymbol}${(stats?.totalRevenue || 0).toLocaleString()}`}
-                        icon={<DollarSign className="w-5 h-5 text-success-600" />}
+                        icon={<DollarSign />}
                         trend={{ value: 18, isPositive: true }}
-                        color="bg-success-100"
+                        color="bg-success-100 text-success-600"
                     />
                     <StatCard
                         title="Monthly Revenue"
                         value={`${currencySymbol}${(stats?.monthlyRevenue || 0).toLocaleString()}`}
-                        icon={<TrendingUp className="w-5 h-5 text-primary-600" />}
+                        icon={<TrendingUp />}
                         trend={{ value: 22, isPositive: true }}
-                        color="bg-primary-100"
+                        color="bg-primary-100 text-primary-600"
                     />
                     {(user?.role === 'super_admin' || user?.role === 'admin') && (
                         <>
                             <StatCard
                                 title="Total Employees"
                                 value={stats?.employeeCount || 0}
-                                icon={<Users className="w-5 h-5 text-secondary-600" />}
-                                color="bg-secondary-100"
+                                icon={<Users />}
+                                color="bg-secondary-100 text-secondary-600"
                             />
                             <StatCard
                                 title="Attendance Rate"
                                 value={`${stats?.attendanceRate || 0}%`}
-                                icon={<Calendar className="w-5 h-5 text-success-600" />}
+                                icon={<Calendar />}
                                 trend={{ value: 2, isPositive: true }}
-                                color="bg-success-100"
+                                color="bg-success-100 text-success-600"
                             />
                         </>
                     )}
@@ -217,22 +217,22 @@ export const DashboardPage: React.FC = () => {
                         <h3 className="text-lg font-semibold">Quick Actions</h3>
                     </CardHeader>
                     <CardBody>
-                        <div className="grid grid-cols-2 gap-4">
-                            <Link to="/crm/clients" className="p-4 border-2 border-gray-200 rounded-lg hover:border-primary-500 hover:bg-primary-50 transition-all duration-200 text-left">
-                                <Users className="w-6 h-6 text-primary-600 mb-2" />
-                                <p className="font-medium text-gray-900">Add Client</p>
+                        <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                            <Link to="/crm/clients" className="p-3 sm:p-4 border-2 border-gray-200 rounded-lg hover:border-primary-500 hover:bg-primary-50 transition-all duration-200 text-left group">
+                                <Users className="w-5 h-5 sm:w-6 sm:h-6 text-primary-600 mb-1 sm:mb-2 group-hover:scale-110 transition-transform" />
+                                <p className="font-medium text-gray-900 text-xs sm:text-base">Add Client</p>
                             </Link>
-                            <Link to="/crm/invoices" className="p-4 border-2 border-gray-200 rounded-lg hover:border-primary-500 hover:bg-primary-50 transition-all duration-200 text-left">
-                                <Receipt className="w-6 h-6 text-primary-600 mb-2" />
-                                <p className="font-medium text-gray-900">Create Invoice</p>
+                            <Link to="/crm/invoices" className="p-3 sm:p-4 border-2 border-gray-200 rounded-lg hover:border-primary-500 hover:bg-primary-50 transition-all duration-200 text-left group">
+                                <Receipt className="w-5 h-5 sm:w-6 sm:h-6 text-primary-600 mb-1 sm:mb-2 group-hover:scale-110 transition-transform" />
+                                <p className="font-medium text-gray-900 text-xs sm:text-base">Create Invoice</p>
                             </Link>
-                            <Link to="/projects" className="p-4 border-2 border-gray-200 rounded-lg hover:border-primary-500 hover:bg-primary-50 transition-all duration-200 text-left">
-                                <FolderKanban className="w-6 h-6 text-primary-600 mb-2" />
-                                <p className="font-medium text-gray-900">New Project</p>
+                            <Link to="/projects" className="p-3 sm:p-4 border-2 border-gray-200 rounded-lg hover:border-primary-500 hover:bg-primary-50 transition-all duration-200 text-left group">
+                                <FolderKanban className="w-5 h-5 sm:w-6 sm:h-6 text-primary-600 mb-1 sm:mb-2 group-hover:scale-110 transition-transform" />
+                                <p className="font-medium text-gray-900 text-xs sm:text-base">New Project</p>
                             </Link>
-                            <Link to="/crm/leads" className="p-4 border-2 border-gray-200 rounded-lg hover:border-primary-500 hover:bg-primary-50 transition-all duration-200 text-left">
-                                <UserPlus className="w-6 h-6 text-primary-600 mb-2" />
-                                <p className="font-medium text-gray-900">Add Lead</p>
+                            <Link to="/crm/leads" className="p-3 sm:p-4 border-2 border-gray-200 rounded-lg hover:border-primary-500 hover:bg-primary-50 transition-all duration-200 text-left group">
+                                <UserPlus className="w-5 h-5 sm:w-6 sm:h-6 text-primary-600 mb-1 sm:mb-2 group-hover:scale-110 transition-transform" />
+                                <p className="font-medium text-gray-900 text-xs sm:text-base">Add Lead</p>
                             </Link>
                         </div>
                     </CardBody>
