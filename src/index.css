@@ -200,7 +200,7 @@
   }
 
   .sidebar-collapsed {
-    @apply -translate-x-full lg:translate-x-0 lg:w-20;
+    @apply lg:w-20;
   }
 
   /* Modal Overlay */
