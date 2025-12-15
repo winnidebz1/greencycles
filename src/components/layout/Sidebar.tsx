@@ -162,19 +162,19 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) => {
                                                     : 'text-slate-400 hover:text-white hover:bg-slate-800'
                                                     }`}
                                             >
-                                                <span className={`${active ? 'text-white' : 'text-slate-400 group-hover:text-white'}`}>{item.icon}</span>
+                                                <span className={`${active ? 'text-white' : 'text-slate-400 group-hover:text-white'} shrink-0`}>{item.icon}</span>
                                                 {!isCollapsed && (
                                                     <>
                                                         <span className="flex-1 text-left font-medium">{item.title}</span>
                                                         <ChevronRight
-                                                            className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-90' : ''
+                                                            className={`w-4 h-4 transition-transform shrink-0 ${isExpanded ? 'rotate-90' : ''
                                                                 }`}
                                                         />
                                                     </>
                                                 )}
                                             </button>
-                                            {!isCollapsed && isExpanded && (
-                                                <ul className="mt-1 ml-4 space-y-1 border-l border-slate-700 pl-2">
+                                            {isExpanded && (
+                                                <ul className={`mt-1 space-y-1 border-l border-slate-700 ${isCollapsed ? 'ml-0 pl-0' : 'ml-4 pl-2'}`}>
                                                     {item.children?.map((child) => (
                                                         <li key={child.path}>
                                                             <Link
