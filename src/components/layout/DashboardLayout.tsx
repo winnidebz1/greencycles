@@ -32,7 +32,7 @@ export const DashboardLayout: React.FC = () => {
 
             {/* Sidebar */}
             <div
-                className={`${isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 transition-transform duration-300`}
+                className={`${isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 transition-transform duration-300 z-50`}
                 onClick={(e) => e.stopPropagation()}
             >
                 <Sidebar
