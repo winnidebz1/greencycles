@@ -116,7 +116,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) => {
 
     return (
         <aside
-            className={`sidebar ${isCollapsed ? 'sidebar-collapsed' : ''} bg-slate-900 border-r border-slate-800 transition-all duration-300 flex flex-col h-screen fixed left-0 top-0 z-30`}
+            className={`sidebar ${isCollapsed ? 'sidebar-collapsed' : ''} bg-slate-900 border-r border-slate-800 transition-all duration-300 flex flex-col h-screen fixed left-0 top-0 z-40`}
         >
             <div className="h-full flex flex-col">
                 {/* Logo */}
