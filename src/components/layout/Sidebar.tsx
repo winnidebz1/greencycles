@@ -156,8 +156,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) => {
                                     {hasChildren ? (
                                         <>
                                             <button
+                                                type="button"
                                                 onClick={() => toggleMenu(item.path)}
-                                                className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 group ${active
+                                                className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 group cursor-pointer ${active
                                                     ? 'bg-primary-600 text-white shadow-lg shadow-primary-900/50'
                                                     : 'text-slate-400 hover:text-white hover:bg-slate-800'
                                                     }`}
