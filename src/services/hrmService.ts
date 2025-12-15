@@ -3,7 +3,6 @@ import type {
     Employee,
     Attendance,
     LeaveRequest,
-    LeaveBalance,
     Payroll,
     Payslip,
     PerformanceReview,
@@ -31,8 +30,9 @@ export const hrmService = {
         create: (data: Partial<Attendance>) => mockStore.create<Attendance>('attendance', data),
         update: (id: string, data: Partial<Attendance>) => mockStore.update<Attendance>('attendance', id, data),
         delete: (id: string) => mockStore.delete('attendance', id),
-        getByEmployee: (employeeId: string, filters?: FilterOptions) => Promise.resolve({ success: true, data: [] }),
-        getReport: (filters?: FilterOptions) => Promise.resolve({ success: true, data: [] }),
+        getByEmployee: (_employeeId: string, _filters?: FilterOptions) => Promise.resolve({ success: true, data: [] }),
+        getReport: (_filters?: FilterOptions) => Promise.resolve({ success: true, data: [] }),
+        mark: (data: any) => Promise.resolve({ success: true, data }),
     },
 
     // Leave Management
@@ -45,7 +45,8 @@ export const hrmService = {
         approve: (id: string) => mockStore.update<LeaveRequest>('leaves', id, { status: 'approved' }),
         reject: (id: string, reason?: string) => mockStore.update<LeaveRequest>('leaves', id, { status: 'rejected', rejectionReason: reason }),
         cancel: (id: string) => mockStore.update<LeaveRequest>('leaves', id, { status: 'cancelled' }),
-        getBalance: (employeeId: string) => Promise.resolve({ success: true, data: [] }),
+        request: (data: Partial<LeaveRequest>) => mockStore.create<LeaveRequest>('leaves', data),
+        getBalance: (_employeeId: string) => Promise.resolve({ success: true, data: [] }),
     },
 
     // Payroll
@@ -56,9 +57,10 @@ export const hrmService = {
         update: (id: string, data: Partial<Payroll>) => mockStore.update<Payroll>('payroll', id, data),
         delete: (id: string) => mockStore.delete('payroll', id),
         approve: (id: string) => mockStore.update<Payroll>('payroll', id, { status: 'approved' }),
+        generate: (_data: any) => Promise.resolve({ success: true, data: {} }), // Stub for generate
         markAsPaid: (id: string) => mockStore.update<Payroll>('payroll', id, { status: 'paid', paidDate: new Date().toISOString() }),
-        generatePayslip: (id: string) => Promise.resolve({ success: true, data: {} as Payslip }),
-        downloadPayslip: (id: string) => Promise.resolve({ success: true, data: 'payslip_url' }),
+        generatePayslip: (_id: string) => Promise.resolve({ success: true, data: {} as Payslip }),
+        downloadPayslip: (_id: string) => Promise.resolve({ success: true, data: 'payslip_url' }),
     },
 
     // Performance
@@ -68,7 +70,9 @@ export const hrmService = {
         create: (data: Partial<PerformanceReview>) => mockStore.create<PerformanceReview>('performance', data),
         update: (id: string, data: Partial<PerformanceReview>) => mockStore.update<PerformanceReview>('performance', id, data),
         delete: (id: string) => mockStore.delete('performance', id),
-        getByEmployee: (employeeId: string) => Promise.resolve({ success: true, data: [] }),
+        getReviews: (filters?: FilterOptions) => mockStore.getAll<PerformanceReview>('performance', filters),
+        addReview: (data: Partial<PerformanceReview>) => mockStore.create<PerformanceReview>('performance', data),
+        getByEmployee: (_employeeId: string) => Promise.resolve({ success: true, data: [] }),
     },
 
     // KPIs
@@ -78,7 +82,7 @@ export const hrmService = {
         create: (data: Partial<KPI>) => mockStore.create<KPI>('kpis', data),
         update: (id: string, data: Partial<KPI>) => mockStore.update<KPI>('kpis', id, data),
         delete: (id: string) => mockStore.delete('kpis', id),
-        getByEmployee: (employeeId: string) => Promise.resolve({ success: true, data: [] }),
+        getByEmployee: (_employeeId: string) => Promise.resolve({ success: true, data: [] }),
     },
 
     // Holidays

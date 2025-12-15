@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Plus, Search, Filter, MoreVertical, CheckCircle, Trash2, Edit, UserCheck, UserX } from 'lucide-react';
+import { Plus, Search, Filter, Trash2, Edit, UserCheck, UserX } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -81,7 +81,7 @@ export const EmployeesPage: React.FC = () => {
             setValue('phone', selectedEmployee.phone);
             setValue('department', selectedEmployee.department);
             setValue('position', selectedEmployee.position);
-            setValue('salary', String(selectedEmployee.salary));
+            setValue('salary', selectedEmployee.salary as any);
             setValue('currency', selectedEmployee.currency || 'USD');
             setValue('startDate', selectedEmployee.hireDate.split('T')[0]);
             setValue('status', selectedEmployee.employmentStatus as any);
@@ -151,7 +151,7 @@ export const EmployeesPage: React.FC = () => {
         try {
             const isActive = employee.employmentStatus === 'active';
             if (isActive) {
-                await hrmService.employees.update(employee.id, { employmentStatus: 'inactive' });
+                await hrmService.employees.update(employee.id, { employmentStatus: 'inactive' } as any);
                 setNotification({ type: 'success', message: 'Employee deactivated' });
             } else {
                 await hrmService.employees.update(employee.id, { employmentStatus: 'active' });

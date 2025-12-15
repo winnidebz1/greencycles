@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Plus, Search, Filter, MoreVertical, CheckCircle, Trash2, Edit } from 'lucide-react';
+import { Plus, Search, Filter, CheckCircle, Trash2, Edit } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -97,7 +97,7 @@ export const LeadsPage: React.FC = () => {
             setValue('name', selectedLead.name);
             setValue('email', selectedLead.email);
             setValue('phone', selectedLead.phone);
-            setValue('company', selectedLead.company);
+            setValue('company', selectedLead.company || '');
             setValue('source', selectedLead.source);
             setValue('status', selectedLead.status);
             setValue('value', String(selectedLead.value || 0) as any);

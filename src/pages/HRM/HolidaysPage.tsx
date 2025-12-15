@@ -22,9 +22,10 @@ export const HolidaysPage: React.FC = () => {
     const [showModal, setShowModal] = useState(false);
     const [notification, setNotification] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
-    const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm({
+    type HolidayFormValues = z.infer<typeof holidaySchema>;
+    const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<HolidayFormValues>({
         resolver: zodResolver(holidaySchema),
-        defaultValues: { isRecurring: true }
+        defaultValues: { isRecurring: true, title: '', date: '' }
     });
 
     useEffect(() => { fetchHolidays(); }, []);

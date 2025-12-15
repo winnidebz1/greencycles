@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Plus, Search, Filter, MoreVertical, CheckCircle, Trash2, Edit, Send, Download } from 'lucide-react';
+import { Plus, Search, Filter, Trash2, Edit, CheckCircle, Send, Download } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -84,7 +84,7 @@ export const InvoicesPage: React.FC = () => {
             setValue('invoiceNumber', selectedInvoice.invoiceNumber);
             setValue('clientName', 'Client ID ' + selectedInvoice.clientId);
             setValue('currency', selectedInvoice.currency || 'USD');
-            setValue('total', String(selectedInvoice.total));
+            setValue('total', selectedInvoice.total as any);
             setValue('dueDate', selectedInvoice.dueDate);
             setValue('status', selectedInvoice.status);
             setShowModal(true);

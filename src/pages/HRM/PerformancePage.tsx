@@ -25,7 +25,8 @@ export const PerformancePage: React.FC = () => {
     const [showModal, setShowModal] = useState(false);
     const [notification, setNotification] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
-    const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm({
+    type ReviewFormValues = z.infer<typeof reviewSchema>;
+    const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<ReviewFormValues>({
         resolver: zodResolver(reviewSchema),
         defaultValues: { rating: 3 }
     });

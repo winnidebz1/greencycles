@@ -19,6 +19,6 @@ export const projectService = {
         create: (data: Partial<Task>) => mockStore.create<Task>('tasks', data),
         update: (id: string, data: Partial<Task>) => mockStore.update<Task>('tasks', id, data),
         delete: (id: string) => mockStore.delete('tasks', id),
-        getByProject: (projectId: string) => Promise.resolve({ success: true, data: [] }), // Mock implementation
+        getByProject: (_projectId: string) => Promise.resolve({ success: true, data: [] }), // Mock implementation
     }
 };

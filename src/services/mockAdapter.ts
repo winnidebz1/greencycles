@@ -113,7 +113,7 @@ class MockDataStore {
     }
 
     // Generic Methods
-    async getAll<T>(resource: string, filters?: any): Promise<ApiResponse<PaginatedResponse<T>>> {
+    async getAll<T>(resource: string, _filters?: any): Promise<ApiResponse<PaginatedResponse<T>>> {
         await this.delay(300); // Intentionally faster for "local" feel
         const data = this.store[resource] || [];
         return {

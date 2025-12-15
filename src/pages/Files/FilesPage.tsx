@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Plus, Trash2, File as FileIcon, Download, Search } from 'lucide-react';
+import { Plus, Trash2, File as FileIcon, Download } from 'lucide-react';
 import {
-    Card, CardBody, Button, LoadingSpinner, Alert
+    Card, CardBody, LoadingSpinner, Alert
 } from '@/components/ui';
 import { fileService } from '@/services/fileService';
 import type { File as FileType } from '@/types';

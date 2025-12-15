@@ -55,8 +55,9 @@ export const TableHead: React.FC<TableHeadProps> = ({ children, className = '' }
 interface TableCellProps {
     children: React.ReactNode;
     className?: string;
+    colSpan?: number;
 }
 
-export const TableCell: React.FC<TableCellProps> = ({ children, className = '' }) => {
-    return <td className={className}>{children}</td>;
+export const TableCell: React.FC<TableCellProps> = ({ children, className = '', colSpan }) => {
+    return <td className={className} colSpan={colSpan}>{children}</td>;
 };

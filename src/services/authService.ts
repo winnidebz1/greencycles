@@ -4,7 +4,7 @@ import type { User, LoginCredentials, RegisterData } from '@/types';
 export const authService = {
     async login(credentials: LoginCredentials) {
         // Mock API call for demo purposes
-        return new Promise<{ success: boolean; data?: { user: User; token: string }; message?: string }>((resolve, reject) => {
+        return new Promise<{ success: boolean; data?: { user: User; token: string }; message?: string }>((resolve) => {
             setTimeout(() => {
                 // Validate credentials for Greencycles
                 if (credentials.email.toLowerCase() === 'greencycles@gmail.com' && credentials.password === 'Greencycles123') {

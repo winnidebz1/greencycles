@@ -1,8 +1,7 @@
 import React from 'react';
 import { useAuthStore } from '@/store/authStore';
 import { useForm } from 'react-hook-form';
-import { Card, CardBody, Button, Input, Alert } from '@/components/ui';
-import { User } from 'lucide-react';
+import { Card, CardBody, Button, Input } from '@/components/ui';
 
 export const ProfilePage: React.FC = () => {
     const { user } = useAuthStore();
@@ -14,7 +13,7 @@ export const ProfilePage: React.FC = () => {
         }
     });
 
-    const onSubmit = (data: any) => {
+    const onSubmit = (_data: any) => {
         alert('Profile updated (Mock Only)');
         // In a real app, update store/backend
     };

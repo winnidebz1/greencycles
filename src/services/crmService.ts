@@ -1,6 +1,5 @@
-import { apiClient } from './api';
 import { mockStore } from './mockAdapter';
-import type { Client, Lead, Proposal, Invoice, Payment, Contract, Ticket, TicketResponse, PaginatedResponse, FilterOptions } from '@/types';
+import type { Client, Lead, Proposal, Invoice, Payment, Contract, Ticket, TicketResponse, FilterOptions } from '@/types';
 
 export const crmService = {
     // Clients
@@ -41,7 +40,7 @@ export const crmService = {
         update: (id: string, data: Partial<Proposal>) => mockStore.update<Proposal>('proposals', id, data),
         delete: (id: string) => mockStore.delete('proposals', id),
         send: (id: string) => mockStore.update('proposals', id, { status: 'sent' }),
-        downloadPdf: (id: string) => Promise.resolve({ success: true, data: 'pdf_url' }),
+        downloadPdf: (_id: string) => Promise.resolve({ success: true, data: 'pdf_url' }),
     },
 
     invoices: {
@@ -51,7 +50,7 @@ export const crmService = {
         update: (id: string, data: Partial<Invoice>) => mockStore.update<Invoice>('invoices', id, data),
         delete: (id: string) => mockStore.delete('invoices', id),
         send: (id: string) => mockStore.update('invoices', id, { status: 'sent' }),
-        downloadPdf: (id: string) => Promise.resolve({ success: true, data: 'pdf_url' }),
+        downloadPdf: (_id: string) => Promise.resolve({ success: true, data: 'pdf_url' }),
         markAsPaid: (id: string) => mockStore.update<Invoice>('invoices', id, { status: 'paid', paidDate: new Date().toISOString() }),
     },
 
@@ -59,13 +58,13 @@ export const crmService = {
         getAll: (filters?: FilterOptions) => mockStore.getAll<Payment>('payments', filters),
         getById: (id: string) => mockStore.getById<Payment>('payments', id),
         create: (data: Partial<Payment>) => mockStore.create<Payment>('payments', data),
-        getByInvoice: (invoiceId: string) => Promise.resolve({ success: true, data: [] }),
+        getByInvoice: (_invoiceId: string) => Promise.resolve({ success: true, data: [] }),
     },
 
     contracts: {
         getAll: (filters?: FilterOptions) => mockStore.getAll<Contract>('contracts', filters),
         getById: (id: string) => mockStore.getById<Contract>('contracts', id),
-        create: (data: Partial<Contract>) => mockStore.create<Contract>('contracts', data),
+        create: (data: any) => mockStore.create<Contract>('contracts', data),
         update: (id: string, data: Partial<Contract>) => mockStore.update<Contract>('contracts', id, data),
         delete: (id: string) => mockStore.delete('contracts', id),
         markAsSigned: (id: string) => mockStore.update<Contract>('contracts', id, { status: 'signed', signedDate: new Date().toISOString() }),
@@ -78,7 +77,7 @@ export const crmService = {
         update: (id: string, data: Partial<Ticket>) => mockStore.update<Ticket>('tickets', id, data),
         delete: (id: string) => mockStore.delete('tickets', id),
         close: (id: string) => mockStore.update<Ticket>('tickets', id, { status: 'closed' }),
-        getResponses: (id: string) => Promise.resolve({ success: true, data: [] }),
-        addResponse: (id: string, data: Partial<TicketResponse>) => Promise.resolve({ success: true, data: {} as TicketResponse }),
+        getResponses: (_id: string) => Promise.resolve({ success: true, data: [] }),
+        addResponse: (_id: string, _data: Partial<TicketResponse>) => Promise.resolve({ success: true, data: {} as TicketResponse }),
     },
 };

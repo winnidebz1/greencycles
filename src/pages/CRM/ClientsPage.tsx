@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Plus, Search, Filter, MoreVertical, Edit, Trash2, Eye } from 'lucide-react';
+import { Plus, Search, Edit, Trash2, Filter } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import {
     Card,
-    CardHeader,
     CardBody,
     Button,
     Input,
@@ -30,7 +29,7 @@ const clientSchema = z.object({
     email: z.string().email('Invalid email address'),
     phone: z.string().min(10, 'Phone number is required'),
     location: z.string().min(2, 'Location is required'),
-    status: z.enum(['active', 'inactive', 'prospective']),
+    status: z.enum(['active', 'inactive', 'prospective', 'archived']),
 });
 
 type ClientFormData = z.infer<typeof clientSchema>;

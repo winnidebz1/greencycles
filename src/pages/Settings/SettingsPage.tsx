@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardBody, Button, Input, Alert } from '@/components/ui';
-import { Bell, Shield, Globe, Moon, Building, DollarSign } from 'lucide-react';
+import { Bell, Shield, Globe, Building } from 'lucide-react';
 import { useSettings } from '@/contexts/SettingsContext';
 
 export const SettingsPage: React.FC = () => {

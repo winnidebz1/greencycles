@@ -1,5 +1,5 @@
 import React from 'react';
-import type { NotificationType } from '@/types';
+
 
 interface BadgeProps {
     children: React.ReactNode;

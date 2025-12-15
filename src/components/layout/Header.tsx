@@ -3,7 +3,6 @@ import { Bell, Search, Menu, LogOut, Settings, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '@/store/authStore';
 import { useNotificationStore } from '@/store/notificationStore';
-import { Badge } from '@/components/ui';
 import { format } from 'date-fns';
 
 interface HeaderProps {

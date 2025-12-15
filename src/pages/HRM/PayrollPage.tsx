@@ -45,7 +45,8 @@ export const PayrollPage: React.FC = () => {
     const [showModal, setShowModal] = useState(false);
     const [notification, setNotification] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
-    const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm({
+    type PayrollFormValues = z.infer<typeof payrollSchema>;
+    const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm<PayrollFormValues>({
         resolver: zodResolver(payrollSchema),
         defaultValues: {
             year: new Date().getFullYear(),

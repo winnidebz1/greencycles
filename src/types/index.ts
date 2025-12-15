@@ -42,7 +42,7 @@ export interface Client {
     phone: string;
     location: string;
     notes?: string;
-    status: 'active' | 'inactive' | 'archived';
+    status: 'active' | 'inactive' | 'archived' | 'prospective';
     createdAt: string;
     updatedAt: string;
 }
@@ -199,7 +199,7 @@ export interface Employee {
     updatedAt: string;
 }
 
-export type EmploymentStatus = 'active' | 'on_leave' | 'suspended' | 'terminated';
+export type EmploymentStatus = 'active' | 'on_leave' | 'suspended' | 'terminated' | 'inactive';
 
 // Attendance Types
 export interface Attendance {

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Plus, Search, Filter, MoreVertical, Edit, Trash2, Eye, Calendar, BarChart2 } from 'lucide-react';
+import { Plus, Edit, Trash2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import {
     Card,
-    CardHeader,
     CardBody,
     Button,
     Input,

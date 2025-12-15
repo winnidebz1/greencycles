@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Plus, Search, Filter, MoreVertical, CheckCircle, Trash2, Edit, Send, FileText, Download } from 'lucide-react';
+import { Plus, Search, Filter, Trash2, Edit, FileText } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -50,7 +50,7 @@ const proposalSchema = z.object({
     currency: z.string().min(1, 'Currency is required'),
     total: z.string().transform((val) => Number(val)).refine((val) => val > 0, 'Total must be positive'),
     validUntil: z.string().min(1, 'Valid Until Date is required'),
-    status: z.enum(['draft', 'sent', 'accepted', 'rejected']),
+    status: z.enum(['draft', 'sent', 'accepted', 'rejected', 'viewed']),
 });
 
 type ProposalFormData = z.infer<typeof proposalSchema>;
@@ -86,7 +86,7 @@ export const ProposalsPage: React.FC = () => {
             setValue('description', selectedProposal.description);
             setValue('clientId', selectedProposal.clientId);
             setValue('currency', selectedProposal.currency || 'USD');
-            setValue('total', String(selectedProposal.total));
+            setValue('total', selectedProposal.total as any);
             setValue('validUntil', selectedProposal.validUntil.split('T')[0]);
             setValue('status', selectedProposal.status);
             setShowModal(true);
