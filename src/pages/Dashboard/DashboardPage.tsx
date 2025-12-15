@@ -34,25 +34,25 @@ const StatCard: React.FC<StatCardProps> = ({ title, value, icon, trend, color })
                 <div className="flex items-center justify-between">
                     <div className="flex-1">
                         <p className="text-sm font-medium text-gray-600 mb-1">{title}</p>
-                        <h3 className="text-3xl font-bold text-gray-900">{value}</h3>
+                        <h3 className="text-2xl font-bold text-gray-900">{value}</h3>
                         {trend && (
                             <div className="flex items-center gap-1 mt-2">
                                 {trend.isPositive ? (
-                                    <ArrowUp className="w-4 h-4 text-success-600" />
+                                    <ArrowUp className="w-3 h-3 text-success-600" />
                                 ) : (
-                                    <ArrowDown className="w-4 h-4 text-danger-600" />
+                                    <ArrowDown className="w-3 h-3 text-danger-600" />
                                 )}
                                 <span
-                                    className={`text-sm font-medium ${trend.isPositive ? 'text-success-600' : 'text-danger-600'
+                                    className={`text-xs font-medium ${trend.isPositive ? 'text-success-600' : 'text-danger-600'
                                         }`}
                                 >
                                     {trend.value}%
                                 </span>
-                                <span className="text-sm text-gray-500">vs last month</span>
+                                <span className="text-xs text-gray-500">vs last month</span>
                             </div>
                         )}
                     </div>
-                    <div className={`w-14 h-14 rounded-xl ${color} flex items-center justify-center`}>
+                    <div className={`w-10 h-10 rounded-lg ${color} flex items-center justify-center shrink-0 ml-4`}>
                         {icon}
                     </div>
                 </div>
@@ -68,11 +68,11 @@ export const DashboardPage: React.FC = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     const getCurrencySymbol = (code: string) => {
-        if (code === 'GHS') return '₵';
-        if (code === 'EUR') return '€';
-        if (code === 'GBP') return '£';
-        if (code === 'NGN') return '₦';
-        return '$';
+        if (code === 'GHS') return 'GHS ';
+        if (code === 'EUR') return 'EUR ';
+        if (code === 'GBP') return 'GBP ';
+        if (code === 'NGN') return 'NGN ';
+        return 'GHS '; // Default to GHS as requested
     };
 
     const currencySymbol = getCurrencySymbol(settings.currency);
@@ -119,28 +119,28 @@ export const DashboardPage: React.FC = () => {
                 <StatCard
                     title="Total Clients"
                     value={stats?.totalClients || 0}
-                    icon={<Users className="w-7 h-7 text-primary-600" />}
+                    icon={<Users className="w-5 h-5 text-primary-600" />}
                     trend={{ value: 12, isPositive: true }}
                     color="bg-primary-100"
                 />
                 <StatCard
                     title="Active Projects"
                     value={stats?.activeProjects || 0}
-                    icon={<FolderKanban className="w-7 h-7 text-secondary-600" />}
+                    icon={<FolderKanban className="w-5 h-5 text-secondary-600" />}
                     trend={{ value: 8, isPositive: true }}
                     color="bg-secondary-100"
                 />
                 <StatCard
                     title="Pending Invoices"
                     value={stats?.pendingInvoices || 0}
-                    icon={<Receipt className="w-7 h-7 text-warning-600" />}
+                    icon={<Receipt className="w-5 h-5 text-warning-600" />}
                     trend={{ value: 5, isPositive: false }}
                     color="bg-warning-100"
                 />
                 <StatCard
                     title="New Leads"
                     value={stats?.newLeads || 0}
-                    icon={<UserPlus className="w-7 h-7 text-success-600" />}
+                    icon={<UserPlus className="w-5 h-5 text-success-600" />}
                     trend={{ value: 15, isPositive: true }}
                     color="bg-success-100"
                 />
@@ -152,14 +152,14 @@ export const DashboardPage: React.FC = () => {
                     <StatCard
                         title="Total Revenue"
                         value={`${currencySymbol}${(stats?.totalRevenue || 0).toLocaleString()}`}
-                        icon={<DollarSign className="w-7 h-7 text-success-600" />}
+                        icon={<DollarSign className="w-5 h-5 text-success-600" />}
                         trend={{ value: 18, isPositive: true }}
                         color="bg-success-100"
                     />
                     <StatCard
                         title="Monthly Revenue"
                         value={`${currencySymbol}${(stats?.monthlyRevenue || 0).toLocaleString()}`}
-                        icon={<TrendingUp className="w-7 h-7 text-primary-600" />}
+                        icon={<TrendingUp className="w-5 h-5 text-primary-600" />}
                         trend={{ value: 22, isPositive: true }}
                         color="bg-primary-100"
                     />
@@ -168,13 +168,13 @@ export const DashboardPage: React.FC = () => {
                             <StatCard
                                 title="Total Employees"
                                 value={stats?.employeeCount || 0}
-                                icon={<Users className="w-7 h-7 text-secondary-600" />}
+                                icon={<Users className="w-5 h-5 text-secondary-600" />}
                                 color="bg-secondary-100"
                             />
                             <StatCard
                                 title="Attendance Rate"
                                 value={`${stats?.attendanceRate || 0}%`}
-                                icon={<Calendar className="w-7 h-7 text-success-600" />}
+                                icon={<Calendar className="w-5 h-5 text-success-600" />}
                                 trend={{ value: 2, isPositive: true }}
                                 color="bg-success-100"
                             />
