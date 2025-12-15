@@ -26,8 +26,8 @@ export const DashboardLayout: React.FC = () => {
             )}
 
             {/* Sidebar */}
-            <div className={`${isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}>
-                <Sidebar isCollapsed={isSidebarCollapsed} onToggle={toggleSidebar} />
+            <div className={`${isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 transition-transform duration-300`}>
+                <Sidebar isCollapsed={isSidebarCollapsed} onToggle={toggleSidebar} isMobileOpen={isMobileSidebarOpen} />
             </div>
 
             {/* Main Content */}

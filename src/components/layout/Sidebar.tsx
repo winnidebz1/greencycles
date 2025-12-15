@@ -86,9 +86,13 @@ const menuItems: MenuItem[] = [
 interface SidebarProps {
     isCollapsed: boolean;
     onToggle: () => void;
+    isMobileOpen?: boolean;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, isMobileOpen = true }) => {
+    // On mobile (< lg breakpoint), use isMobileOpen to determine if content should be visible
+    // On desktop, use isCollapsed
+    const showContent = typeof window !== 'undefined' && window.innerWidth < 1024 ? isMobileOpen : !isCollapsed;
     const location = useLocation();
     const { user, logout } = useAuthStore();
     const { settings } = useSettings();
@@ -163,7 +167,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) => {
                                                     }`}
                                             >
                                                 <span className={`${active ? 'text-white' : 'text-slate-400 group-hover:text-white'} shrink-0`}>{item.icon}</span>
-                                                {!isCollapsed && (
+                                                {showContent && (
                                                     <>
                                                         <span className="flex-1 text-left font-medium">{item.title}</span>
                                                         <ChevronRight
@@ -201,7 +205,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) => {
                                                 }`}
                                         >
                                             <span className={`${active ? 'text-white' : 'text-slate-400 group-hover:text-white'}`}>{item.icon}</span>
-                                            {!isCollapsed && <span className="font-medium">{item.title}</span>}
+                                            {showContent && <span className="font-medium">{item.title}</span>}
                                         </Link>
                                     )}
                                 </li>
@@ -220,7 +224,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) => {
                 </nav>
 
                 {/* User Info */}
-                {!isCollapsed && user && (
+                {showContent && user && (
                     <div className="px-6 py-4 border-t border-slate-800">
                         <div className="flex items-center gap-3">
                             <div className="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center border-2 border-slate-600">
