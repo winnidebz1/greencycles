@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 
 export const DashboardLayout: React.FC = () => {
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
     const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+    const location = useLocation();
+
+    // Close mobile sidebar when route changes
+    useEffect(() => {
+        console.log('DashboardLayout: Route changed, closing mobile sidebar');
+        setIsMobileSidebarOpen(false);
+    }, [location.pathname]);
 
     const toggleSidebar = () => {
         setIsSidebarCollapsed(!isSidebarCollapsed);
