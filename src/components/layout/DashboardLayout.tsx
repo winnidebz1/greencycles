@@ -17,23 +17,9 @@ export const DashboardLayout: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-gray-50">
-            {/* Mobile Sidebar Overlay */}
-            {isMobileSidebarOpen && (
-                <div
-                    className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
-                    onClick={(e) => {
-                        // Only close if clicking the overlay itself, not its children
-                        if (e.target === e.currentTarget) {
-                            toggleMobileSidebar();
-                        }
-                    }}
-                />
-            )}
-
             {/* Sidebar */}
             <div
-                className={`${isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 transition-transform duration-300 z-50`}
-                onClick={(e) => e.stopPropagation()}
+                className={`fixed left-0 top-0 h-full ${isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 transition-transform duration-300 z-50`}
             >
                 <Sidebar
                     isCollapsed={isSidebarCollapsed}
@@ -41,6 +27,15 @@ export const DashboardLayout: React.FC = () => {
                     onMobileClose={() => setIsMobileSidebarOpen(false)}
                 />
             </div>
+
+            {/* Mobile Sidebar Overlay - only covers the main content area, not the sidebar */}
+            {isMobileSidebarOpen && (
+                <div
+                    className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+                    onClick={toggleMobileSidebar}
+                    style={{ left: '256px' }} // Don't cover the sidebar (256px = w-64)
+                />
+            )}
 
             {/* Main Content */}
             <div
