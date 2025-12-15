@@ -97,10 +97,16 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, onMobil
 
     // Close mobile sidebar when route changes
     useEffect(() => {
-        if (onMobileClose) {
+        console.log('Route changed to:', location.pathname);
+        console.log('onMobileClose exists:', !!onMobileClose);
+        console.log('Window width:', window.innerWidth);
+
+        // Only close on mobile (width < 1024px)
+        if (onMobileClose && window.innerWidth < 1024) {
+            console.log('Calling onMobileClose');
             onMobileClose();
         }
-    }, [location.pathname, onMobileClose]);
+    }, [location.pathname]);
 
     const handleLogout = () => {
         logout();
