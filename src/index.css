@@ -196,7 +196,7 @@
 
   /* Sidebar */
   .sidebar {
-    @apply fixed left-0 top-0 h-full w-64 bg-white border-r border-gray-200 shadow-sm z-40 transition-transform duration-300;
+    @apply h-full w-64 bg-white border-r border-gray-200 shadow-sm z-40 transition-transform duration-300;
   }
 
   .sidebar-collapsed {

@@ -86,9 +86,10 @@ const menuItems: MenuItem[] = [
 interface SidebarProps {
     isCollapsed: boolean;
     onToggle: () => void;
+    onClose?: () => void;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle, onClose }) => {
     const location = useLocation();
     const { user, logout } = useAuthStore();
     const { settings } = useSettings();
@@ -116,7 +117,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) => {
 
     return (
         <aside
-            className={`sidebar ${isCollapsed ? 'sidebar-collapsed' : ''} bg-slate-900 border-r border-slate-800 transition-all duration-300 flex flex-col h-screen fixed left-0 top-0 z-40`}
+            className={`sidebar ${isCollapsed ? 'sidebar-collapsed' : ''} bg-slate-900 border-r border-slate-800 transition-all duration-300 flex flex-col h-full`}
         >
             <div className="h-full flex flex-col">
                 {/* Logo */}
@@ -138,6 +139,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, onToggle }) => {
                         ) : (
                             <ChevronLeft className="w-5 h-5" />
                         )}
+                    </button>
+                    {/* Mobile Close Button */}
+                    <button
+                        onClick={onClose}
+                        className="p-2 hover:bg-slate-800 rounded-lg transition-colors text-slate-400 lg:hidden block ml-auto"
+                    >
+                        <ChevronLeft className="w-5 h-5" />
                     </button>
                 </div>
 
